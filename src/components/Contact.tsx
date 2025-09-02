@@ -87,11 +87,14 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/contact`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to send message");
 
@@ -158,6 +161,7 @@ const Contact: React.FC = () => {
               </div>
             ) : (
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+                {/* Name */}
                 <div className="form-element">
                   <label htmlFor="name" className="block text-slate-300 text-sm font-medium mb-2">
                     Full Name *
@@ -174,6 +178,7 @@ const Contact: React.FC = () => {
                   />
                 </div>
 
+                {/* Email */}
                 <div className="form-element">
                   <label htmlFor="email" className="block text-slate-300 text-sm font-medium mb-2">
                     Email Address *
@@ -190,6 +195,7 @@ const Contact: React.FC = () => {
                   />
                 </div>
 
+                {/* Company */}
                 <div className="form-element">
                   <label htmlFor="company" className="block text-slate-300 text-sm font-medium mb-2">
                     Company / Organization
@@ -205,6 +211,7 @@ const Contact: React.FC = () => {
                   />
                 </div>
 
+                {/* Message */}
                 <div className="form-element">
                   <label htmlFor="message" className="block text-slate-300 text-sm font-medium mb-2">
                     Message *
@@ -221,6 +228,7 @@ const Contact: React.FC = () => {
                   />
                 </div>
 
+                {/* Submit */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -242,7 +250,7 @@ const Contact: React.FC = () => {
             )}
           </div>
 
-          {/* Contact Information */}
+          {/* Contact Info */}
           <div className="space-y-8">
             <div>
               <h3 className="text-xl sm:text-2xl font-semibold text-white mb-4 sm:mb-6">Get in Touch</h3>
