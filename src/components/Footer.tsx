@@ -1,14 +1,13 @@
 // src/components/Footer.tsx
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { Github, Linkedin, Mail, ExternalLink, ArrowUp, Menu, X } from "lucide-react";
+import { Github, Linkedin, Mail, ExternalLink, ArrowUp } from "lucide-react";
 import Certification from "./Certification";
 
 const Footer: React.FC = () => {
   const footerRef = useRef<HTMLElement>(null);
   const wireframeRef = useRef<HTMLDivElement>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const footer = footerRef.current;
@@ -168,66 +167,56 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Layout */}
+        {/* Mobile Layout (always open) */}
         <div className="md:hidden text-center">
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="flex items-center justify-center mx-auto mb-6 p-3 rounded-full bg-slate-800/60 text-white hover:bg-slate-700 transition"
-          >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
-            <span className="ml-2">{menuOpen ? "Close Menu" : "Open Menu"}</span>
-          </button>
-
-          {menuOpen && (
-            <div className="space-y-6">
-              {/* Social Links */}
-              <div>
-                <h4 className="text-white font-semibold mb-4">Connect With Me</h4>
-                <div className="flex justify-center gap-6">
-                  {socialLinks.map((social) => {
-                    const IconComponent = social.icon;
-                    return (
-                      <a
-                        key={social.name}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`social-icon p-3 bg-slate-800/50 border border-slate-700/50 rounded-full text-slate-400 ${social.color} transition-all duration-300 hover:scale-110 hover:border-current`}
-                        aria-label={social.name}
-                      >
-                        <IconComponent size={20} />
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Quick Links */}
-              <div>
-                <h4 className="text-white font-semibold mb-4">Quick Links</h4>
-                <div className="flex flex-col gap-3">
-                  {["About", "Education", "Projects", "Certificates", "Contact"].map(
-                    (link) => (
-                      <a
-                        key={link}
-                        href={`#${link.toLowerCase().replace(" ", "-")}`}
-                        className="text-slate-400 hover:text-white transition-colors duration-300"
-                      >
-                        {link}
-                      </a>
-                    )
-                  )}
-                  <button
-                    onClick={scrollToTop}
-                    className="flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-colors duration-300"
-                  >
-                    <ArrowUp size={16} />
-                    Back to Top
-                  </button>
-                </div>
+          <div className="mb-6 space-y-6">
+            {/* Social Links */}
+            <div>
+              <h4 className="text-white font-semibold mb-4">Connect With Me</h4>
+              <div className="flex justify-center gap-6">
+                {socialLinks.map((social) => {
+                  const IconComponent = social.icon;
+                  return (
+                    <a
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`social-icon p-3 bg-slate-800/50 border border-slate-700/50 rounded-full text-slate-400 ${social.color} transition-all duration-300 hover:scale-110 hover:border-current`}
+                      aria-label={social.name}
+                    >
+                      <IconComponent size={20} />
+                    </a>
+                  );
+                })}
               </div>
             </div>
-          )}
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+              <div className="flex flex-col gap-3">
+                {["About", "Education", "Projects", "Certificates", "Contact"].map(
+                  (link) => (
+                    <a
+                      key={link}
+                      href={`#${link.toLowerCase().replace(" ", "-")}`}
+                      className="text-slate-400 hover:text-white transition-colors duration-300"
+                    >
+                      {link}
+                    </a>
+                  )
+                )}
+                <button
+                  onClick={scrollToTop}
+                  className="flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-colors duration-300"
+                >
+                  <ArrowUp size={16} />
+                  Back to Top
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Bottom Section */}
